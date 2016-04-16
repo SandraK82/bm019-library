@@ -83,6 +83,16 @@ BM019_STATE stateBM019 = BM019_STATE_UNKNOWN;
 
 int write_read(uint8_t *tx_buf, int tx_len, int timeout = BM019_READY_TIMEOUT); //write, poll, read
 
+/*bool stateAtLeast(BM019_STATE requiredState)
+ {
+ if(stateBM019 < requiredState)
+ {
+ DEBUG("required state %d, having state %d",requiredState,stateBM019);
+ return false;
+ }
+ return true;
+ }*/
+
 bool resetBM019()
 {
     if(stateBM019 < BM019_STATE_ANSWERING) {
@@ -323,14 +333,15 @@ bool inventoryISO_IES_15693BM019(BM019_TAG *tag, int timeout)
         DEBUG("to few bytes recieved \n");
         return false;
     }
-    if(rxBuffer[tlen-1] & 0x01) {
-        DEBUG("got collision \n");
-        return false;
-    }
-    if(rxBuffer[tlen-1] & 0x02) {
-        DEBUG("got bad crc \n");
-        return false;
-    }
+    /* this does not work very good, maybe something misinterpreted from docs
+     if(rxBuffer[tlen-1] & 0x01) {
+     DEBUG("got collision \n");
+     return false;
+     }
+     if(rxBuffer[tlen-1] & 0x02) {
+     DEBUG("got bad crc \n");
+     return false;
+     }*/
     tag->crc[0] = rxBuffer[tlen-2];
     tag->crc[1] = rxBuffer[tlen-3];
 

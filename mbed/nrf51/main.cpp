@@ -269,12 +269,19 @@ int main(void)
     /* setup advertising */
     ble.accumulateAdvertisingPayload(GapAdvertisingData::BREDR_NOT_SUPPORTED);
     ble.setAdvertisingType(GapAdvertisingParams::ADV_CONNECTABLE_UNDIRECTED);
+    //ble.setAdvertisingType(GapAdvertisingParams::ADV_SCANNABLE_UNDIRECTED);
     ble.accumulateAdvertisingPayload(GapAdvertisingData::SHORTENED_LOCAL_NAME,
                                      (const uint8_t *)"BLE UART2NFC", sizeof("BLE UART2NFC") - 1);
-    ble.accumulateAdvertisingPayload(GapAdvertisingData::COMPLETE_LIST_128BIT_SERVICE_IDS,
-                                     (const uint8_t *)UARTServiceUUID_reversed, sizeof(UARTServiceUUID_reversed));
-    
+
+
+    /*ble.accumulateAdvertisingPayload(GapAdvertisingData::COMPLETE_LIST_128BIT_SERVICE_IDS,
+     (const uint8_t *)UARTServiceUUID_reversed, sizeof(UARTServiceUUID_reversed));
+     */
+
+    ble.accumulateScanResponse(GapAdvertisingData::COMPLETE_LIST_128BIT_SERVICE_IDS,
+                               (const uint8_t *)UARTServiceUUID_reversed, sizeof(UARTServiceUUID_reversed));
     ble.setAdvertisingInterval(1000); /* 1000ms; in multiples of 0.625ms. */
+    //ble.setAdvertisingTimeout(0x1);
     ble.startAdvertising();
     
     UARTService uartService(ble);
