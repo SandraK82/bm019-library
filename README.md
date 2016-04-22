@@ -11,21 +11,21 @@ https://developer.mbed.org/users/SandraK/code/BLE-bm019-uart/
 
 The spi version is preconfigured for the nrf51-dk evaluation board.
 The Wiring is:
-BM019 nrf51-DK
-VIN   5V
-GND   Ground
-VDD-SS0 (bridge VDD (3V) to SS0 to indicate SPI MOde to BM019)
-DIN   P0.01
-SS    P0.02
-MISO  P0.03
-MOSI  P0.04
-CLK   P0.05
+- BM019 nrf51-DK
+- VIN   5V
+- GND   Ground
+- VDD-SS0 (bridge VDD (3V) to SS0 to indicate SPI MOde to BM019)
+- DIN   P0.01
+- SS    P0.02
+- MISO  P0.03
+- MOSI  P0.04
+- CLK   P0.05
 
 The uart version is preconfigured for the Bluefruit UART friend:
-Power     -> BM019.VIN
-Ground    -> BM019.SS0, BM019.GND, BLE.GND
-BM019.VDD -> BLE.VIN
-BM019.DIN -> BLE.TX
-BM019.DOUT -> BLE.RX
+- Power     -> BM019.VIN
+- Ground    -> BM019.SS0, BM019.GND, BLE.GND
+- BM019.VDD -> BLE.VIN
+- BM019.DIN -> BLE.TX
+- BM019.DOUT -> BLE.RX
 
 We have completly erased the bluefruit and overwritten with std bootloader, softdevice and our firmware via nrf51-dk onboard programmer.
